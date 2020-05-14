@@ -9,15 +9,24 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import date
 
-url = "https://archiveofourown.org/works/23075947?view_full_work=true "
+url = "https://archiveofourown.org/works/14541447?view_full_work=true"
 req = requests.get(url)
 
 soup = BeautifulSoup(req.text, "html.parser")
 
+# html = requests.get("https://archiveofourown.org/works/1005863?view_full_work=true")
+#
+# soup = BeautifulSoup(html.text, "html.parser")
+
+
 #Print title
 title_text = soup.title.text
+invalid_chars = ['<','>',':','"','/',"|",'?','/']
 title = title_text.strip()
-print(title)
+# remove invalid characters from title so it can be used as the file name
+for char in invalid_chars:
+    if char in title:
+        title = title.replace(char,'')
 complete_work = open(title +".txt", "w")
 complete_work.write(title + "\n\n")
 complete_work.write(f'URL: {url} \n')
@@ -38,7 +47,7 @@ for stat in stats:
 
 
 
-#Remove stats row from meta data, since they have already been printed
+#Remove stats row from metadata, since it has already been printed
 stats = soup.find_all(class_= "stats")
 for lines in stats:
     lines = lines.decompose()
@@ -59,6 +68,14 @@ for info in meta:
 summary = soup.find('div', {'class':'summary'})
 text = summary.p.text.strip()
 complete_work.write(f'\nSummary:\n{text}\n')
+
+
+
+# #Print author's notes
+# notes = soup.find('div', {'id':'notes'})
+# text = notes.blockquote.p.text.strip()
+# complete_work.write(text + "\n")
+
 
 #New Line splace
 new_line = ("\n")
