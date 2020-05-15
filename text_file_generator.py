@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import date
 
-url = "https://archiveofourown.org/works/1005863?view_full_work=true"
+url = "https://archiveofourown.org/works/23075947?view_full_work=true"
 
 def save_to_file(url):
     req = requests.get(url)
