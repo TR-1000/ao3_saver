@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import date
 
-url = "https://archiveofourown.org/works/14541447?view_full_work=true"
+url = "https://archiveofourown.org/works/24141334"
 req = requests.get(url)
 
 soup = BeautifulSoup(req.text, "html.parser")
