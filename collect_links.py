@@ -6,7 +6,6 @@ from datetime import date
 from text_file_generator import save_to_file
 
 
-
 # This script collects all links for a 'fandom', in this case the Star Wars Prequel Trilogy fandom. Because I love the Prequel Trilogy.
 
 fandom = {
@@ -14,6 +13,7 @@ fandom = {
     'url': "https://archiveofourown.org/tags/Star%20Wars%20Prequel%20Trilogy/works?page=12&view_adult=true",
     'stories': []
 }
+
 
 url = fandom['url']
 while url:
@@ -57,7 +57,7 @@ while url:
 
 for story in fandom['stories']:
     try:
-        save_to_file(f'https://archiveofourown.org{story["url"]}')
+        save_to_file(f'https://archiveofourown.org{story["url"]}?view_full_work=true&view_adult=true')
     except Exception as e:
         print(f'ERROR! {story["url"]} was not saved.')
         print(e)
