@@ -24,7 +24,7 @@ def save_to_file(url):
     for char in invalid_chars:
         if char in title:
             title = title.replace(char,'')
-    complete_work = open(title +".txt", "w", encoding='utf-8')
+    complete_work = open(".\\sample_output\\"+title +".txt", "w", encoding='utf-8')
     complete_work.write(title + "\n\n")
     complete_work.write(f'URL: {url} \n')
     complete_work.write(f'Saved: {date.today()} \n')
@@ -89,3 +89,5 @@ def save_to_file(url):
 
     complete_work.close()
     print('FINISHED!')
+
+save_to_file(url)
