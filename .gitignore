@@ -130,3 +130,5 @@ dmypy.json
 
 .soup.py
 soup.py
+
+output/
