@@ -1,9 +1,9 @@
 import requests
 import pprint
-import time
 pp = pprint.PrettyPrinter(indent=4)
 from bs4 import BeautifulSoup
 from datetime import date
+from random import randint
 from text_file_generator import save_to_file
 
 
@@ -16,19 +16,19 @@ fandom = {
 }
 
 
-url = "https://archiveofourown.org/tags/Star%20Wars%20Prequel%20Trilogy/works?page=4&view_adult=true"
+url = fandom['url']
 while url:
     try:
         req = requests.get(url)
         print(f'Starting on {url}')
-        time.sleep(6)
+        time.sleep(randint(1,5))
         soup = BeautifulSoup(req.text, "html.parser")
         works = soup.select('div.header.module')
 
         # Get link of each story on the page and save it with the save_to_file function.
         for work in works:
             try:
-                time.sleep(7)
+                time.sleep(randint(1,5))
                 story_url = f'https://archiveofourown.org/{work.a.get("href")}?view_full_work=true'
                 save_to_file(story_url)
                 print()
@@ -64,7 +64,7 @@ while url:
             url = f'https://archiveofourown.org/{next_page}'
         except:
             url = None
-        print(f'Next url: {url}')
+        print(f'CURRENT PAGE: {url}\n')
 
     # If there is an error saving the story skip to the next
     except Exception as error:
